@@ -11,6 +11,7 @@ export const updateRulesList = (queryObject, rulesList) => {
   const { id: idx } = queryObject.rules[queryObject.rules.length - 1];
   rulesList.push({
     id: idx,
+    placeHolder: 'E.g John',
   });
 
   const updatedRules = queryObject.rules;
@@ -44,4 +45,25 @@ export const deleteRule = (queryObject, rulesList, id) => {
     updatedRulesList,
     filteredRules,
   };
+};
+
+export const changeInputPlaceHolder = (event) => {
+  let placeHolder = '';
+  if (event === 'First Name') {
+    placeHolder = 'E.g John';
+  }
+  if (event === 'Last Name') {
+    placeHolder = 'E.g Doe';
+  }
+  if (event === 'Age') {
+    placeHolder = 'E.g 10';
+  }
+  if (event === 'Level') {
+    placeHolder = 'E.g 1289';
+  }
+  if (event === 'Enrollment Year') {
+    placeHolder = 'E.g 2021';
+  }
+
+  return placeHolder;
 };

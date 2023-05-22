@@ -7,14 +7,18 @@ import Value from './Value';
 
 function RuleItem(props) {
   const {
-    onFieldChange, onOperatorChange, onValueChange, onDelete,
+    onFieldChange,
+    onOperatorChange,
+    onValueChange,
+    onDelete,
+    placeHolder,
   } = props;
 
   return (
     <div>
       <Field onFieldChange={onFieldChange} />
       <Operator onOperatorChange={onOperatorChange} />
-      <Value onValueChange={onValueChange} />
+      <Value onValueChange={onValueChange} placeHolder={placeHolder} />
       <GeneralButton
         className="btn-delete-rule"
         buttonText="DELETE"
@@ -29,6 +33,7 @@ RuleItem.propTypes = {
   onOperatorChange: PropTypes.func.isRequired,
   onValueChange: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
+  placeHolder: PropTypes.string.isRequired,
 };
 
 export default RuleItem;

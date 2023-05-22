@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 import Logical from './Logical';
 import GeneralButton from './GeneralButton';
-import { updateRulesList, onEventChange, deleteRule } from '../helper';
+import {
+  updateRulesList,
+  onEventChange,
+  deleteRule,
+  changeInputPlaceHolder,
+} from '../helper';
 import Rule from './Rule';
 
 function Query() {
@@ -34,6 +39,11 @@ function Query() {
 
   const handleFieldChange = (event, idx) => {
     handleEventChange('field', event, idx);
+
+    const placeHolder = changeInputPlaceHolder(event);
+    setRulesList(
+      rulesList.map((rule) => (rule.id === idx ? { ...rule, placeHolder } : rule)),
+    );
   };
 
   const handleOperatorChange = (event, idx) => {

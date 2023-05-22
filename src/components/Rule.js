@@ -18,6 +18,7 @@ function Rule(props) {
       onOperatorChange={(event) => onOperatorChange(event, item.id)}
       onValueChange={(event) => onValueChange(event, item.id)}
       onDelete={() => onDelete(item.id)}
+      placeHolder={item.placeHolder}
     />
   ));
 }
