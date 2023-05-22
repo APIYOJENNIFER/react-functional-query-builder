@@ -6,12 +6,12 @@ import GeneralButton from './GeneralButton';
 import Value from './Value';
 
 function RuleItem(props) {
-  const { onFieldChange } = props;
+  const { onFieldChange, onOperatorChange } = props;
 
   return (
     <div>
       <Field onFieldChange={onFieldChange} />
-      <Operator />
+      <Operator onOperatorChange={onOperatorChange} />
       <Value />
       <GeneralButton className="btn-delete-rule" buttonText="DELETE" />
     </div>
@@ -20,6 +20,7 @@ function RuleItem(props) {
 
 RuleItem.propTypes = {
   onFieldChange: PropTypes.func.isRequired,
+  onOperatorChange: PropTypes.func.isRequired,
 };
 
 export default RuleItem;
