@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 import Logical from './Logical';
 import GeneralButton from './GeneralButton';
-import { updateRulesList, onEventChange } from '../helper';
+import { updateRulesList, onEventChange, deleteRule } from '../helper';
 import Rule from './Rule';
 
 function Query() {
@@ -44,6 +44,16 @@ function Query() {
     handleEventChange('value', event, idx);
   };
 
+  const handleDelete = (id) => {
+    const deleteResult = deleteRule(queryObject, rulesList, id);
+
+    setQueryObject({
+      ...queryObject,
+      rules: deleteResult.filteredRules,
+    });
+    setRulesList(deleteResult.updatedRulesList);
+  };
+
   return (
     <div className="App">
       <div className="App-heading">
@@ -63,6 +73,7 @@ function Query() {
         onFieldChange={handleFieldChange}
         onOperatorChange={handleOperatorChange}
         onValueChange={handleValueChange}
+        onDelete={handleDelete}
       />
     </div>
   );

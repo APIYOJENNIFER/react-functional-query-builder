@@ -4,7 +4,11 @@ import RuleItem from './RuleItem';
 
 function Rule(props) {
   const {
-    rulesList, onFieldChange, onOperatorChange, onValueChange,
+    rulesList,
+    onFieldChange,
+    onOperatorChange,
+    onValueChange,
+    onDelete,
   } = props;
 
   return rulesList.map((item) => (
@@ -13,6 +17,7 @@ function Rule(props) {
       onFieldChange={(event) => onFieldChange(event, item.id)}
       onOperatorChange={(event) => onOperatorChange(event, item.id)}
       onValueChange={(event) => onValueChange(event, item.id)}
+      onDelete={() => onDelete(item.id)}
     />
   ));
 }
@@ -21,6 +26,7 @@ Rule.propTypes = {
   onFieldChange: PropTypes.func.isRequired,
   onOperatorChange: PropTypes.func.isRequired,
   onValueChange: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default Rule;

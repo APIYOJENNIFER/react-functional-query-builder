@@ -30,5 +30,18 @@ export const onEventChange = (queryObject, key, event, idx) => {
   });
   const updatedRules = queryObject.rules;
 
-  return { queryObject, updatedRules };
+  return { updatedRules };
+};
+
+export const deleteRule = (queryObject, rulesList, id) => {
+  const updatedRulesList = rulesList.filter((item) => item.id !== id);
+  const newQueryObject = queryObject;
+  const filteredRules = newQueryObject.rules.filter((rule) => rule.id !== id);
+
+  newQueryObject.rules = filteredRules;
+
+  return {
+    updatedRulesList,
+    filteredRules,
+  };
 };
