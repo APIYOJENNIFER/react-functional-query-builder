@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 
-const updateRulesList = (queryObject, rulesList) => {
+export const updateRulesList = (queryObject, rulesList) => {
   const ruleObject = {
     id: nanoid(),
     field: 'First Name',
@@ -20,4 +20,15 @@ const updateRulesList = (queryObject, rulesList) => {
     updatedRules,
   };
 };
-export default updateRulesList;
+
+export const onEventChange = (queryObject, key, event, idx) => {
+  queryObject.rules.forEach((rule) => {
+    if (rule.id === idx) {
+      const currentRule = rule;
+      currentRule[key] = event.trim();
+    }
+  });
+  const updatedRules = queryObject.rules;
+
+  return { queryObject, updatedRules };
+};

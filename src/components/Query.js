@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 import Logical from './Logical';
 import GeneralButton from './GeneralButton';
-import updateRulesList from '../helper';
+import { updateRulesList, onEventChange } from '../helper';
 import Rule from './Rule';
 
 function Query() {
@@ -23,6 +23,19 @@ function Query() {
     setRulesList(updatedRulesList.rulesList);
   };
 
+  const handleEventChange = (key, event, idx) => {
+    const eventResult = onEventChange(queryObject, key, event, idx);
+
+    setQueryObject({
+      ...queryObject,
+      rules: eventResult.updatedRules,
+    });
+  };
+
+  const handleFieldChange = (event, idx) => {
+    handleEventChange('field', event, idx);
+  };
+
   return (
     <div className="App">
       <div className="App-heading">
@@ -37,7 +50,7 @@ function Query() {
           onClick={addRule}
         />
       </div>
-      <Rule rulesList={rulesList} />
+      <Rule rulesList={rulesList} onFieldChange={handleFieldChange} />
     </div>
   );
 }
