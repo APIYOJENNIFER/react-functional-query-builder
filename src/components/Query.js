@@ -40,6 +40,10 @@ function Query() {
     handleEventChange('operator', event, idx);
   };
 
+  const handleValueChange = (event, idx) => {
+    handleEventChange('value', event, idx);
+  };
+
   return (
     <div className="App">
       <div className="App-heading">
@@ -58,6 +62,7 @@ function Query() {
         rulesList={rulesList}
         onFieldChange={handleFieldChange}
         onOperatorChange={handleOperatorChange}
+        onValueChange={handleValueChange}
       />
     </div>
   );
