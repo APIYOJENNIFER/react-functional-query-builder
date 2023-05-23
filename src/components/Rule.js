@@ -19,6 +19,9 @@ function Rule(props) {
       onValueChange={(event) => onValueChange(event, item.id)}
       onDelete={() => onDelete(item.id)}
       placeHolder={item.placeHolder}
+      isValid={item.isValid}
+      errorMessage={item.errorMessage}
+      value={item.value}
     />
   ));
 }

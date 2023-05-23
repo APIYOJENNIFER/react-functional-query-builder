@@ -7,6 +7,7 @@ import {
   onEventChange,
   deleteRule,
   changeInputPlaceHolder,
+  validateInput,
 } from '../helper';
 import Rule from './Rule';
 
@@ -42,8 +43,19 @@ function Query() {
 
     const placeHolder = changeInputPlaceHolder(event);
     setRulesList(
-      rulesList.map((rule) => (rule.id === idx ? { ...rule, placeHolder } : rule)),
+      rulesList.map((rule) =>
+        rule.id === idx
+          ? { ...rule, placeHolder, isValid: true, errorMessage: '', value: '' }
+          : rule
+      )
     );
+
+    setQueryObject({
+      ...queryObject,
+      rules: queryObject.rules.map((rule) =>
+        rule.id === idx ? { ...rule, value: '' } : rule
+      ),
+    });
   };
 
   const handleOperatorChange = (event, idx) => {
@@ -51,7 +63,24 @@ function Query() {
   };
 
   const handleValueChange = (event, idx) => {
-    handleEventChange('value', event, idx);
+    const validationResult = validateInput(queryObject, event, idx);
+
+    if (validationResult.isValid) {
+      handleEventChange('value', event, idx);
+    }
+
+    setRulesList(
+      rulesList.map((rule) =>
+        rule.id === idx
+          ? {
+              ...rule,
+              isValid: validationResult.isValid,
+              errorMessage: validationResult.errorMessage,
+              value: event,
+            }
+          : rule
+      )
+    );
   };
 
   const handleDelete = (id) => {
@@ -78,13 +107,15 @@ function Query() {
           onClick={addRule}
         />
       </div>
-      <Rule
-        rulesList={rulesList}
-        onFieldChange={handleFieldChange}
-        onOperatorChange={handleOperatorChange}
-        onValueChange={handleValueChange}
-        onDelete={handleDelete}
-      />
+      <div className="rules">
+        <Rule
+          rulesList={rulesList}
+          onFieldChange={handleFieldChange}
+          onOperatorChange={handleOperatorChange}
+          onValueChange={handleValueChange}
+          onDelete={handleDelete}
+        />
+      </div>
     </div>
   );
 }
