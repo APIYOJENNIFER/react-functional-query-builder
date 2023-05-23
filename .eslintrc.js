@@ -5,8 +5,8 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
-    'prettier',
     'airbnb',
+    'prettier',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'plugin:jsx-a11y/recommended',
