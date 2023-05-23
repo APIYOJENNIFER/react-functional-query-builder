@@ -24,12 +24,15 @@ hr {
   display: flex;
   align-items: center;
   margin-top: 10px;
+  background-color: azure;
+  margin: 10px 10px 1px 10px;
+  border-radius: 2px;
 }
 
 .logical-select {
   margin: 10px;
   padding: 8px;
-  border: 1px solid gainsboro;
+  border: 1px solid lightgray;
   border-radius: 2px;
   font-size: 14px;
   font-family: 'Times New Roman', Times, serif;
@@ -44,4 +47,22 @@ hr {
   font-size: 14px;
   background-color: rgb(49, 148, 49);
   font-family: 'Times New Roman', Times, serif;
+}
+
+.json {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 1px;
+  background-color: azure;
+  padding: 10px;
+  border-radius: 2px;
+  color: #0c4160;
+}
+
+.query-output {
+  background-color: white;
+  padding: 10px;
+  margin: 0px 10px 10px 10px;
+  border-radius: 2px;
+  font-size: 16px;
 }

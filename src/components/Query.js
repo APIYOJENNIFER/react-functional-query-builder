@@ -10,6 +10,7 @@ import {
   validateInput,
 } from '../helper';
 import Rule from './Rule';
+import QueryOutput from './QueryOutput';
 
 function Query() {
   const [queryObject, setQueryObject] = useState({
@@ -88,7 +89,7 @@ function Query() {
   return (
     <div className="App">
       <div className="App-heading">
-        <h2>React Query Builder</h2>
+        <h2>React Query Builder - Functional Components</h2>
       </div>
       <hr />
       <div className="App-top-section">
@@ -108,6 +109,7 @@ function Query() {
           onDelete={handleDelete}
         />
       </div>
+      <QueryOutput queryObject={queryObject} />
     </div>
   );
 }
