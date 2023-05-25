@@ -3,15 +3,10 @@ import PropTypes from 'prop-types';
 import RuleItem from './RuleItem';
 
 function Rule(props) {
-  const {
-    rulesList,
-    onFieldChange,
-    onOperatorChange,
-    onValueChange,
-    onDelete,
-  } = props;
+  const { rules, onFieldChange, onOperatorChange, onValueChange, onDelete } =
+    props;
 
-  return rulesList.map((item) => (
+  return rules.map((item) => (
     <RuleItem
       key={item.id}
       onFieldChange={(event) => onFieldChange(event, item.id)}
@@ -26,7 +21,7 @@ function Rule(props) {
   ));
 }
 Rule.propTypes = {
-  rulesList: PropTypes.oneOfType([PropTypes.array]).isRequired,
+  rules: PropTypes.oneOfType([PropTypes.array]).isRequired,
   onFieldChange: PropTypes.func.isRequired,
   onOperatorChange: PropTypes.func.isRequired,
   onValueChange: PropTypes.func.isRequired,

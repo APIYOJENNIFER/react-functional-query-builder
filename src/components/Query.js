@@ -17,16 +17,14 @@ function Query() {
     combinator: 'AND',
     rules: [],
   });
-  const [rulesList, setRulesList] = useState([]);
 
   const handleLogicalChange = (event) => {
     setQueryObject({ ...queryObject, combinator: event });
   };
 
   const addRule = () => {
-    const updatedRulesList = updateRulesList(queryObject, rulesList);
+    const updatedRulesList = updateRulesList(queryObject);
     setQueryObject({ ...queryObject, rules: updatedRulesList.updatedRules });
-    setRulesList(updatedRulesList.rulesList);
   };
 
   const handleEventChange = (key, event, idx) => {
@@ -42,18 +40,12 @@ function Query() {
     handleEventChange('field', event, idx);
 
     const placeHolder = changeInputPlaceHolder(event);
-    setRulesList(
-      rulesList.map((rule) =>
-        rule.id === idx
-          ? { ...rule, placeHolder, isValid: true, errorMessage: '', value: '' }
-          : rule
-      )
-    );
-
     setQueryObject({
       ...queryObject,
       rules: queryObject.rules.map((rule) =>
-        rule.id === idx ? { ...rule, value: '' } : rule
+        rule.id === idx
+          ? { ...rule, placeHolder, isValid: true, errorMessage: '', value: '' }
+          : rule
       ),
     });
   };
@@ -69,8 +61,9 @@ function Query() {
       handleEventChange('value', event, idx);
     }
 
-    setRulesList(
-      rulesList.map((rule) =>
+    setQueryObject({
+      ...queryObject,
+      rules: queryObject.rules.map((rule) =>
         rule.id === idx
           ? {
               ...rule,
@@ -79,18 +72,17 @@ function Query() {
               value: event,
             }
           : rule
-      )
-    );
+      ),
+    });
   };
 
   const handleDelete = (id) => {
-    const deleteResult = deleteRule(queryObject, rulesList, id);
+    const deleteResult = deleteRule(queryObject, id);
 
     setQueryObject({
       ...queryObject,
       rules: deleteResult.filteredRules,
     });
-    setRulesList(deleteResult.updatedRulesList);
   };
 
   return (
@@ -109,7 +101,7 @@ function Query() {
       </div>
       <div className="rules">
         <Rule
-          rulesList={rulesList}
+          rules={queryObject.rules}
           onFieldChange={handleFieldChange}
           onOperatorChange={handleOperatorChange}
           onValueChange={handleValueChange}

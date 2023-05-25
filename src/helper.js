@@ -1,26 +1,20 @@
 import { nanoid } from 'nanoid';
 
-export const updateRulesList = (queryObject, rulesList) => {
+export const updateRulesList = (queryObject) => {
   const ruleObject = {
     id: nanoid(),
     field: 'First Name',
     operator: '=',
     value: '',
-  };
-  queryObject.rules.push(ruleObject);
-  const { id: idx, value } = queryObject.rules[queryObject.rules.length - 1];
-  rulesList.push({
-    id: idx,
     placeHolder: 'E.g John',
     isValid: true,
     errorMessage: '',
-    value,
-  });
+  };
+  queryObject.rules.push(ruleObject);
 
   const updatedRules = queryObject.rules;
 
   return {
-    rulesList,
     updatedRules,
   };
 };
@@ -37,15 +31,13 @@ export const onEventChange = (queryObject, key, event, idx) => {
   return { updatedRules };
 };
 
-export const deleteRule = (queryObject, rulesList, id) => {
-  const updatedRulesList = rulesList.filter((item) => item.id !== id);
+export const deleteRule = (queryObject, id) => {
   const newQueryObject = queryObject;
   const filteredRules = newQueryObject.rules.filter((rule) => rule.id !== id);
 
   newQueryObject.rules = filteredRules;
 
   return {
-    updatedRulesList,
     filteredRules,
   };
 };
