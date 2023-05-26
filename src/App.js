@@ -1,15 +1,10 @@
 import './App.css';
-
+import './Rules.css';
 import React from 'react';
+import Query from './components/Query';
 
 function App() {
-  return (
-    <div className="App">
-      <div className="App-heading">
-        <h2>Query Builder - Functional Components</h2>
-      </div>
-    </div>
-  );
+  return <Query />;
 }
 
 export default App;
