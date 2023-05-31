@@ -4,7 +4,6 @@ import Logical from './Logical';
 import GeneralButton from './GeneralButton';
 import {
   updateRulesList,
-  onEventChange,
   deleteRule,
   changeInputPlaceHolder,
   validateInput,
@@ -28,39 +27,36 @@ function Query() {
     setQueryObject({ ...queryObject, rules: updatedRulesList.updatedRules });
   };
 
-  const handleEventChange = (key, event, idx) => {
-    const eventResult = onEventChange(queryObject, key, event, idx);
-
-    setQueryObject({
-      ...queryObject,
-      rules: eventResult.updatedRules,
-    });
-  };
-
   const handleFieldChange = (event, idx) => {
-    handleEventChange('field', event, idx);
-
     const placeHolder = changeInputPlaceHolder(event);
     setQueryObject({
       ...queryObject,
       rules: queryObject.rules.map((rule) =>
         rule.id === idx
-          ? { ...rule, placeHolder, isValid: true, errorMessage: '', value: '' }
+          ? {
+              ...rule,
+              field: event,
+              placeHolder,
+              isValid: true,
+              errorMessage: '',
+              value: '',
+            }
           : rule
       ),
     });
   };
 
   const handleOperatorChange = (event, idx) => {
-    handleEventChange('operator', event, idx);
+    setQueryObject({
+      ...queryObject,
+      rules: queryObject.rules.map((rule) =>
+        rule.id === idx ? { ...rule, operator: event } : rule
+      ),
+    });
   };
 
   const handleValueChange = (event, idx) => {
     const validationResult = validateInput(queryObject, event, idx);
-
-    if (validationResult.isValid) {
-      handleEventChange('value', event, idx);
-    }
 
     setQueryObject({
       ...queryObject,
@@ -68,9 +64,9 @@ function Query() {
         rule.id === idx
           ? {
               ...rule,
+              value: event,
               isValid: validationResult.isValid,
               errorMessage: validationResult.errorMessage,
-              value: event,
             }
           : rule
       ),

@@ -19,18 +19,6 @@ export const updateRulesList = (queryObject) => {
   };
 };
 
-export const onEventChange = (queryObject, key, event, idx) => {
-  queryObject.rules.forEach((rule) => {
-    if (rule.id === idx) {
-      const currentRule = rule;
-      currentRule[key] = event.trim();
-    }
-  });
-  const updatedRules = queryObject.rules;
-
-  return { updatedRules };
-};
-
 export const deleteRule = (queryObject, id) => {
   const newQueryObject = queryObject;
   const filteredRules = newQueryObject.rules.filter((rule) => rule.id !== id);
