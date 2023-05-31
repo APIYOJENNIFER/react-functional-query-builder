@@ -126,3 +126,17 @@ export const validateInput = (queryObject, event, idx) => {
 
   return { isValid, errorMessage };
 };
+
+export const filterObject = (queryObject) => {
+  const filteredObject = {
+    ...queryObject,
+    rules: queryObject.rules.map(({ id, field, operator, value }) => ({
+      id,
+      field,
+      operator,
+      value,
+    })),
+  };
+
+  return { filteredObject };
+};
