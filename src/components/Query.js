@@ -18,8 +18,8 @@ function Query() {
     rules: [],
   });
 
-  const handleLogicalChange = (event) => {
-    setQueryObject({ ...queryObject, combinator: event });
+  const handleLogicalChange = (logical) => {
+    setQueryObject({ ...queryObject, combinator: logical });
   };
 
   const addRule = () => {
@@ -27,15 +27,15 @@ function Query() {
     setQueryObject({ ...queryObject, rules: updatedRulesList.updatedRules });
   };
 
-  const handleFieldChange = (event, idx) => {
-    const placeHolder = changeInputPlaceHolder(event);
+  const handleFieldChange = (field, idx) => {
+    const placeHolder = changeInputPlaceHolder(field);
     setQueryObject({
       ...queryObject,
       rules: queryObject.rules.map((rule) =>
         rule.id === idx
           ? {
               ...rule,
-              field: event,
+              field,
               placeHolder,
               isValid: true,
               errorMessage: '',
@@ -46,17 +46,17 @@ function Query() {
     });
   };
 
-  const handleOperatorChange = (event, idx) => {
+  const handleOperatorChange = (operator, idx) => {
     setQueryObject({
       ...queryObject,
       rules: queryObject.rules.map((rule) =>
-        rule.id === idx ? { ...rule, operator: event } : rule
+        rule.id === idx ? { ...rule, operator } : rule
       ),
     });
   };
 
-  const handleValueChange = (event, idx) => {
-    const validationResult = validateInput(queryObject, event, idx);
+  const handleValueChange = (value, idx) => {
+    const validationResult = validateInput(queryObject, value, idx);
 
     setQueryObject({
       ...queryObject,
@@ -64,7 +64,7 @@ function Query() {
         rule.id === idx
           ? {
               ...rule,
-              value: event,
+              value,
               isValid: validationResult.isValid,
               errorMessage: validationResult.errorMessage,
             }

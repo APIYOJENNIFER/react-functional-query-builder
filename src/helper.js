@@ -30,21 +30,21 @@ export const deleteRule = (queryObject, id) => {
   };
 };
 
-export const changeInputPlaceHolder = (event) => {
+export const changeInputPlaceHolder = (field) => {
   let placeHolder = '';
-  if (event === 'First Name') {
+  if (field === 'First Name') {
     placeHolder = 'E.g John';
   }
-  if (event === 'Last Name') {
+  if (field === 'Last Name') {
     placeHolder = 'E.g Doe';
   }
-  if (event === 'Age') {
+  if (field === 'Age') {
     placeHolder = 'E.g 10';
   }
-  if (event === 'Level') {
+  if (field === 'Level') {
     placeHolder = 'E.g 1289';
   }
-  if (event === 'Enrollment Year') {
+  if (field === 'Enrollment Year') {
     placeHolder = 'E.g 2021';
   }
 
@@ -81,7 +81,7 @@ const validateEnrollmentYear = (inputString) => {
   return checkIfInputIsValid(inputString, reg);
 };
 
-export const validateInput = (queryObject, event, idx) => {
+export const validateInput = (queryObject, value, idx) => {
   let isValid = true;
   let errorMessage = '';
 
@@ -92,23 +92,23 @@ export const validateInput = (queryObject, event, idx) => {
         currentRule.field === 'First Name' ||
         currentRule.field === 'Last Name'
       ) {
-        isValid = validateName(event);
+        isValid = validateName(value);
         errorMessage = 'Name should contain alphabetical characters only';
       }
 
       if (currentRule.field === 'Age') {
-        isValid = validateAge(event);
+        isValid = validateAge(value);
         errorMessage = 'Please enter a valid age using digits only';
       }
 
       if (currentRule.field === 'Level') {
-        isValid = validateLevel(event);
+        isValid = validateLevel(value);
         errorMessage =
           'Level should contain digits only, not exceeding six digits';
       }
 
       if (currentRule.field === 'Enrollment Year') {
-        isValid = validateEnrollmentYear(event);
+        isValid = validateEnrollmentYear(value);
         errorMessage = 'Please enter a valid year using digits only';
       }
     }
